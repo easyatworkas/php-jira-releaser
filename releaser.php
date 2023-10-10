@@ -15,7 +15,7 @@ $options = new Options($argv, [
     '-n',
 ]);
 
-$jiraUrl = 'https://easyatwork.atlassian.net/rest/api/3/';
+$jiraUrl = $_ENV['JIRA_API_URL'] ?? 'https://easyatwork.atlassian.net/rest/api/3/';
 $jiraLogin = $_ENV['JIRA_LOGIN'] ?? '';
 $jiraToken = $_ENV['JIRA_TOKEN'] ?? '';
 
