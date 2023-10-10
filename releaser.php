@@ -17,7 +17,7 @@ $options = new Options($argv, [
 
 $jiraUrl = 'https://easyatwork.atlassian.net/rest/api/3/';
 $jiraLogin = $_ENV['JIRA_LOGIN'] ?? '';
-$jiraToken = $_ENV['JIRA_TOKEN'] ?? ''; // See https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+$jiraToken = $_ENV['JIRA_TOKEN'] ?? '';
 
 $jiraProjectKey = $options->getFirstOption([ '--project', '-p' ]) ?? $_ENV['JIRA_PROJECT_KEY'] ?? '';
 $jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?? $_ENV['JIRA_VERSION_PREFIX'] ?? '';
