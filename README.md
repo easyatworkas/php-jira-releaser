@@ -5,7 +5,7 @@ Parses Git log for Jira issues and creates or updates releases in Jira.
 ## Installation
 
 1. Clone the repository.
-2. Add the variables `JIRA_LOGIN` and `JIRA_TOKEN` to your environment ([how to create a token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)).
+2. Add the variables `JIRA_API_URL` (ignore this if you're employed at EaW), `JIRA_LOGIN`, and `JIRA_TOKEN` to your environment ([how to create a token](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)).
 3. Add the "bin" directory to your path.
 
 ## Usage
