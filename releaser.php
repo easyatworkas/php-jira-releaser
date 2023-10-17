@@ -15,9 +15,12 @@ $options = new Options($argv, [
     '-n',
 ]);
 
-$jiraUrl = $_ENV['JIRA_API_URL'] ?? 'https://easyatwork.atlassian.net/rest/api/3/';
-$jiraLogin = $_ENV['JIRA_LOGIN'] ?? '';
-$jiraToken = $_ENV['JIRA_TOKEN'] ?? '';
+$jiraUrl = getenv('JIRA_API_URL') ?: 'https://easyatwork.atlassian.net/rest/api/3/';
+$jiraLogin = getenv('JIRA_LOGIN') ?: '';
+$jiraToken = getenv('JIRA_TOKEN') ?: '';
+
+$jiraProjectKey = $options->getFirstOption([ '--project', '-p' ]) ?: getenv('JIRA_PROJECT_KEY') ?: '';
+$jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?: getenv('JIRA_VERSION_PREFIX') ?: '';
 
 $jiraProjectKey = $options->getFirstOption([ '--project', '-p' ]) ?? $_ENV['JIRA_PROJECT_KEY'] ?? '';
 $jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?? $_ENV['JIRA_VERSION_PREFIX'] ?? '';
@@ -28,7 +31,7 @@ $jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?? $_EN
 
 $changes = new Changes();
 
-$tag = $options->getFirstOption([ '--tag', '-t' ]) ?? $changes->getLastTag();
+$tag = $options->getFirstOption([ '--tag', '-t' ]) ?: $changes->getLastTag();
 
 echo 'Comparing ', $changes->getTag($tag, -1), ' to ', $tag, '...', PHP_EOL;
 
