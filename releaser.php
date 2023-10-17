@@ -101,6 +101,17 @@ foreach ($issues as $issue) {
 
 echo PHP_EOL;
 
+/**
+ * Mark release as released.
+ */
+
+echo 'Marking release as released...', PHP_EOL;
+
+$jira->updateProjectVersion($jiraVersion['id'], [
+    'released' => true,
+    'releaseDate' => date('Y-m-d'),
+]);
+
 echo 'Done :)', PHP_EOL;
 
 exit;

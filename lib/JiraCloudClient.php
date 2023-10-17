@@ -59,9 +59,18 @@ class JiraCloudClient extends JsonApiClient
         return $this->request('POST', 'version', null, [
             'name' => $version,
             'project' => $project, // Deprecated by Jira, but easier for us :)
-            'released' => true,
-            'releaseDate' => date('Y-m-d'),
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @param array $data
+     * @return array
+     * @throws Exception
+     */
+    public function updateProjectVersion(int $id, array $data)
+    {
+        return $this->request('PUT', 'version/' . $id, null, $data);
     }
 
     /**
