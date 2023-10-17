@@ -6,6 +6,26 @@
 class JiraCloudClient extends JsonApiClient
 {
     /**
+     * @param string $method
+     * @param string $endpoint
+     * @param array|null $params
+     * @param array|null $data
+     * @param array $headers
+     * @return array
+     * @throws Exception
+     */
+    protected function request(string $method, string $endpoint, array $params = null, array $data = null, array $headers = []): array
+    {
+        $response = parent::request($method, $endpoint, $params, $data, $headers);
+
+        if ($response['errorMessages'] ?? null) {
+            throw new Exception(implode(', ', $response['errorMessages']));
+        }
+
+        return $response;
+    }
+
+    /**
      * @param string $email
      * @param string $token
      * @return void

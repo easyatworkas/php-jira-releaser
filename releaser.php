@@ -22,8 +22,13 @@ $jiraToken = getenv('JIRA_TOKEN') ?: '';
 $jiraProjectKey = $options->getFirstOption([ '--project', '-p' ]) ?: getenv('JIRA_PROJECT_KEY') ?: '';
 $jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?: getenv('JIRA_VERSION_PREFIX') ?: '';
 
-$jiraProjectKey = $options->getFirstOption([ '--project', '-p' ]) ?? $_ENV['JIRA_PROJECT_KEY'] ?? '';
-$jiraVersionPrefix = $options->getFirstOption([ '--name-prefix', '-n' ]) ?? $_ENV['JIRA_VERSION_PREFIX'] ?? '';
+if ($jiraLogin == '' || $jiraToken == '') {
+    throw new Exception('Jira credentials not set.');
+}
+
+if ($jiraProjectKey == '') {
+    throw new Exception('Jira project key not set.');
+}
 
 /**
  * Parse the Git log for Jira issues.
