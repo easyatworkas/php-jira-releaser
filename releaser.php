@@ -86,17 +86,21 @@ echo 'Updating issues...', PHP_EOL;
 foreach ($issues as $issue) {
     echo $issue, ', ';
 
-    $jira->updateIssue($issue, [
-        'update' => [
-            'fixVersions' => [
-                [
-                    'add' => [
-                        'name' => $versionName,
+    try {
+        $jira->updateIssue($issue, [
+            'update' => [
+                'fixVersions' => [
+                    [
+                        'add' => [
+                            'name' => $versionName,
+                        ],
                     ],
                 ],
             ],
-        ],
-    ]);
+        ]);
+    } catch (Exception $exception) {
+        echo $exception->getMessage(), PHP_EOL;
+    }
 }
 
 echo PHP_EOL;
